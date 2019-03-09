@@ -45,3 +45,12 @@
         <input type="submit" value="Post comment">
     </form>
 {% endblock %}
+
+{% block sidebar %}
+    <h2>Similar Posts</h2>
+    {% for post in similar_posts %}
+        <p>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        </p>
+    {% endfor %}
+{% endblock %}
