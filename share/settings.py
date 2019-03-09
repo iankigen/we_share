@@ -28,7 +28,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
-	'blog'
+	'blog',
+	'taggit'
 ]
 
 INSTALLED_APPS += [

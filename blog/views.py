@@ -2,6 +2,8 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.views.generic import ListView
 from django.shortcuts import render, get_object_or_404, redirect
+from taggit.models import Tag
+
 from .models import Post, Comment
 from .forms import EmailPostForm, CommentForm
 
@@ -11,6 +13,19 @@ class PostListView(ListView):
 	context_object_name = 'posts'
 	paginate_by = settings.PER_PAGE
 	template_name = 'blog/post/list.html'
+
+	def get_context_data(self, **kwargs):
+		tag = None
+		posts = Post.published.all()
+		if 'tag' in self.kwargs.keys():
+			tag = self.kwargs.get('tag')
+			tag_obj = get_object_or_404(Tag, slug=tag)
+			posts = Post.published.filter(tags__in=[tag_obj])
+		context = super().get_context_data(object_list=posts, **kwargs)
+		context['posts'] = posts
+		context['tag'] = tag
+
+		return context
 
 
 def post_detail(request, year, month, day, post):
