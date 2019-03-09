@@ -119,6 +119,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 PER_PAGE = 2
+SUGGESTIONS = 5
 
 EMAIL_HOST = os.getenv('EMAIL_HOST')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
