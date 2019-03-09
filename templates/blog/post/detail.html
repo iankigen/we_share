@@ -6,7 +6,7 @@
     <h2>
         <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
     </h2>
-     <p class="date">
+    <p class="date">
         Published {{ post.publish }}
     </p>
     <p>
@@ -20,4 +20,28 @@
             Share this post
         </a>
     </p>
+
+    {% with comments.count as total_comments %}
+        <h2>{{ total_comments }} comment{{ total_comments|pluralize }}</h2>
+    {% endwith %}
+    {% for comment in comments %}
+        <div class="comment">
+            <p class="info">
+                {{ comment.name }}
+                {{ comment.created }}
+            </p>
+            {{ comment|linebreaks }}
+        </div>
+    {% empty %}
+        <p>Be the first to comment.</p>
+    {% endfor %}
+
+    {% if new_comment %}
+        <p>Your comment has been added.</p>
+    {% endif %}
+    <form action="" method="post">
+        {{ comment_form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Post comment">
+    </form>
 {% endblock %}
