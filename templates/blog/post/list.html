@@ -1,4 +1,5 @@
 {% extends 'blog/base.html' %}
+{% load blog_tags %}
 
 {% block title %}
     We Share
@@ -25,7 +26,7 @@
             Author: {{ post.author }}
         </p>
         <p>
-            {{ post.body|truncatewords:30|linebreaks }}
+            {{ post.body|markdown|truncatewords_html:30 }}
         </p>
     {% endfor %}
     {% include 'pagination.html' with page=page_obj %}
