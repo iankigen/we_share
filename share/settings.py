@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 INSTALLED_APPS = [
 	'blog',
-	'taggit'
+	'taggit',
+	'haystack',
 ]
 
 INSTALLED_APPS += [
@@ -132,3 +133,10 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
+
+HAYSTACK_CONNECTIONS = {
+	'default': {
+		'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+		'URL': 'http://127.0.0.1:8983/solr/share'
+	}
+}
