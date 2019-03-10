@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
 	'blog',
 	'taggit',
-	'haystack',
 ]
 
 INSTALLED_APPS += [
@@ -45,6 +44,9 @@ INSTALLED_APPS += [
 
 	'django.contrib.sites',
 	'django.contrib.sitemaps',
+
+	# 'haystack',
+
 ]
 
 MIDDLEWARE = [
@@ -137,6 +139,7 @@ EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 HAYSTACK_CONNECTIONS = {
 	'default': {
 		'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-		'URL': 'http://127.0.0.1:8983/solr/share'
+		'URL': 'http://127.0.0.1:8983/solr/share',
+		'ADMIN_URL': 'http://127.0.0.1:8983/solr/admin/cores'
 	}
 }
