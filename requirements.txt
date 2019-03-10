@@ -6,6 +6,7 @@ django-taggit==0.24.0
 ipython==7.3.0
 ipython-genutils==0.2.0
 jedi==0.13.3
+Markdown==3.0.1
 parso==0.3.4
 pexpect==4.6.0
 pickleshare==0.7.5
