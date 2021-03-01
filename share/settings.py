@@ -22,15 +22,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', False)
+DEBUG = os.getenv('DEBUG', True)
 WEB_HOST = os.getenv('WEB_HOST', '')
 
 SITE_ID = 1
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    WEB_HOST,
-]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
@@ -153,3 +150,12 @@ ELASTICSEARCH_DSL = {
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+# Deploy ./manage.py check --deploy
+
+CSRF_COOKIE_SECURE = True if not DEBUG else False
+X_FRAME_OPTIONS = 'DENY' if not DEBUG else 'SAMEORIGIN'
+SECURE_CONTENT_TYPE_NOSNIFF = True if not DEBUG else False
+SECURE_BROWSER_XSS_FILTER = True if not DEBUG else False
+SECURE_SSL_REDIRECT = True if not DEBUG else False
+SESSION_COOKIE_SECURE = True if not DEBUG else False
