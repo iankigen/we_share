@@ -13,17 +13,25 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import debug_toolbar
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
+from django.views.generic import RedirectView
+from django.views.static import serve
 from blog.sitemaps import PostSitemap
 from blog.feeds import LatestPostsFeed
 
 sitemaps = {'posts': PostSitemap, }
 
 urlpatterns = [
-	path('admin/', admin.site.urls),
-	path('blog/', include('blog.urls', namespace='blog')),
-	path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-	path('feed/', LatestPostsFeed(), name='post_feed')
+    path('admin/', admin.site.urls),
+    path('', RedirectView.as_view(url='blog/', permanent=False), name='index'),
+    path('blog/', include('blog.urls', namespace='blog')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('feed/', LatestPostsFeed(), name='post_feed'),
+    path('__debug__/', include(debug_toolbar.urls)),
+    path('media/<path>', serve, {'document_root': settings.MEDIA_ROOT}),
+    path('static/<path>', serve, {'document_root': settings.STATIC_ROOT}),
 ]
