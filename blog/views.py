@@ -4,8 +4,7 @@ from django.views.generic import ListView
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Count
 from taggit.models import Tag
-from haystack.query import SearchQuerySet
-
+from .documents import PostDocument
 from .models import Post
 from .forms import EmailPostForm, CommentForm, SearchForm
 
@@ -101,8 +100,9 @@ def post_search(request):
 		form = SearchForm(request.GET)
 		if form.is_valid():
 			data = form.cleaned_data
-			results = SearchQuerySet().models(Post).filter(content=data['query']).load_all()
-			# total_results = results.count()
+			results = PostDocument.search().filter("term", body=data['query'])
+			total_results = results.count()
+			# import pdb; pdb.set_trace()
 	return render(
 		request,
 		'blog/post/search.html',

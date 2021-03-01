@@ -15,7 +15,7 @@
             <h1>Posts containig: {{ data.query }}</h1>
             <h3>Found {{ total_results }} result{{ total_results|pluralize }}</h3>
             {% for result in results %}
-                {% with post=result.object %}
+                {% with post=result %}
                     <h4>
                         <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
                     </h4>
