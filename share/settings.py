@@ -128,8 +128,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = 'share/static/'
-MEDIA_ROOT = 'share/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 PER_PAGE = 2
 SUGGESTIONS = 5
@@ -153,9 +153,9 @@ INTERNAL_IPS = [
 
 # Deploy ./manage.py check --deploy
 
-CSRF_COOKIE_SECURE = True if not DEBUG else False
-X_FRAME_OPTIONS = 'DENY' if not DEBUG else 'SAMEORIGIN'
-SECURE_CONTENT_TYPE_NOSNIFF = True if not DEBUG else False
-SECURE_BROWSER_XSS_FILTER = True if not DEBUG else False
-SECURE_SSL_REDIRECT = True if not DEBUG else False
-SESSION_COOKIE_SECURE = True if not DEBUG else False
+# CSRF_COOKIE_SECURE = True if not DEBUG else False
+# X_FRAME_OPTIONS = 'DENY' if not DEBUG else 'SAMEORIGIN'
+# SECURE_CONTENT_TYPE_NOSNIFF = True if not DEBUG else False
+# SECURE_BROWSER_XSS_FILTER = True if not DEBUG else False
+# SECURE_SSL_REDIRECT = True if not DEBUG else False
+# SESSION_COOKIE_SECURE = True if not DEBUG else False
