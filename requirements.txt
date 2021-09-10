@@ -24,7 +24,7 @@ python-dateutil==2.8.1
 python-ptrace==0.9.7
 pytz==2018.9
 six==1.12.0
-sqlparse==0.4.1
+sqlparse==0.4.2
 traitlets==4.3.2
 urllib3==1.26.3
 wcwidth==0.1.7
